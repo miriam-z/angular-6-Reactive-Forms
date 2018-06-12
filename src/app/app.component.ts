@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms'
+import {passValidator} from './custom-validators'
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,26 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  
+  rForm: FormGroup;
+  post: any;
+  name: string = '';
+  email: string = '';
+  password: string = '';
+  cnfpassword: string = '';
+
+  constructor(fb: FormBuilder){
+    this.rForm = fb.group({
+      'name': [null, Validators.required],
+      'email': [null, [Validators.required, Validators.email]],
+      'password': [null],
+      'cnfpassword': [null, passValidator]
+
+    });
+  }
+
+  addForm(post){
+
+  }
+
 }
